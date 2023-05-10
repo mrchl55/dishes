@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.module.css';
+import Form from "./components/form/Form";
+import {useTypedSelector as useSelector} from "./hooks/useTypedSelector";
+import Result from "./components/result/Result";
+import classes from './App.module.css'
+const App: React.FC = () => {
+    const {data, error, loading} = useSelector(state => state.dishes)
+    const {id, name, preparation_time, type} = data
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className={classes.app}>
+            <Form/>
+            {(data?.id && !error && !loading) ?
+                <Result id={id!} name={name!} preparation_time={preparation_time!} type={type!}/> : ''
+            }
+            {error && <div>{error}</div>}
+            {loading && <div>Fetching data...</div>}
+        </div>
+    );
 }
 
 export default App;

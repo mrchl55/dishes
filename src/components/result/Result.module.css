@@ -1,0 +1,12 @@
+.result{
+    margin-top:20px;
+    border:2px solid darkgreen;
+}
+.result ul{
+    list-style: none;
+    padding: 10px;
+}
+.result ul li{
+  color:white;
+    padding:3px;
+}
